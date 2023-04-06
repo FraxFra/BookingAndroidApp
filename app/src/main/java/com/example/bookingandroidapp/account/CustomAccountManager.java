@@ -28,6 +28,14 @@ public class CustomAccountManager {
                 sharedPreferences.getString("password",null)
         );
     }
+    public String getToken() {
+        return sharedPreferences.getString("token", null);
+    }
+
+    public void setToken(String token) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.apply();
+    }
 
     public void deleteSavedCredentials(){
         SharedPreferences.Editor e =  sharedPreferences.edit();
