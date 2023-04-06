@@ -1,23 +1,25 @@
 package com.example.bookingandroidapp.account;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 
 public class CustomAccountManager {
-    private SharedPreferences sharedPreferences;
+    private static SharedPreferences sharedPreferences;
 
     public CustomAccountManager(Activity activity){
-        sharedPreferences = activity.getApplicationContext().getSharedPreferences("Preferences",0);
+        sharedPreferences = activity.getSharedPreferences("Preferences", MODE_PRIVATE);
     }
 
-    public void saveLoginCredentials(String username, String password){
+    public static void saveLoginCredentials(String username, String password){
         SharedPreferences.Editor e =  sharedPreferences.edit();
         e.putString("username",username);
         e.putString("password",password);
         e.apply();
     }
 
-    public boolean hasSavedCredentials(){
+    public static boolean hasSavedCredentials(){
         return sharedPreferences.contains("username") && sharedPreferences.contains("password");
     }
 
@@ -30,11 +32,6 @@ public class CustomAccountManager {
     }
     public String getToken() {
         return sharedPreferences.getString("token", null);
-    }
-
-    public void setToken(String token) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.apply();
     }
 
     public void deleteSavedCredentials(){

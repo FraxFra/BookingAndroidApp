@@ -9,5 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#B9B9B9</color>
     <color name="light_grey">#CFCFCF</color>
-    <color name="colorPrimary">#CD5C5C</color>
+    <color name="primary">#FF1744</color>
+    <color name="primaryDark">#D50000</color>
+    <color name="primaryLight">#FF5252</color>
+    <color name="accent">#FFA726</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
 </resources>
