@@ -22,4 +22,6 @@
     <string name="username">Username</string>
     <string name="bookingandroidapp">BookingAndroidApp</string>
     <string name="benvenuto">Benvenuto</string>
+    <string name="ripetizione">Non c\'è nessuna ripetizione diponibile</string>
+    <string name="aa">aa</string>
 </resources>

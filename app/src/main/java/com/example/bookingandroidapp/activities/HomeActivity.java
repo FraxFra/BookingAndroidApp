@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,14 +15,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingandroidapp.R;
 import com.example.bookingandroidapp.account.CustomAccountManager;
+import com.example.bookingandroidapp.data.AvailablePrenotationsAdapter;
+import com.example.bookingandroidapp.data.PrenotationsLoader;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
     private CustomAccountManager account;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private TextView titoloTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         account = new CustomAccountManager(this);
 
         //set dell'username
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
         View headerView = navigationView.getHeaderView(0);
         TextView usernameTextView = headerView.findViewById(R.id.user_name);
         usernameTextView.setText(account.getLoginCredentials().username);
@@ -51,6 +59,8 @@ public class HomeActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.action_available_reservations:
                         // Gestione del click sul menu "Home"
+                        PrenotationsLoader p = new PrenotationsLoader(HomeActivity.this, recyclerView, progressBar, titoloTextView);
+                        p.execute();
                         break;
                     case R.id.action_logout:
                         // Gestione del click sul menu "Logout"
@@ -60,6 +70,15 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        //lista delle prenotazioni dispononibili
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        progressBar = findViewById(R.id.progress_bar);
+        titoloTextView = findViewById(R.id.titolo_text_view);
+
+        PrenotationsLoader p = new PrenotationsLoader(this, recyclerView, progressBar, titoloTextView);
+        p.execute();
     }
 
     private void showLogoutDialog() {
@@ -79,4 +98,5 @@ public class HomeActivity extends AppCompatActivity {
         builder.setNegativeButton("No", null);
         builder.show();
     }
+
 }

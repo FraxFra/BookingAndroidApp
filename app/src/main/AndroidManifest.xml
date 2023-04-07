@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookingAndroidApp"
         android:enableOnBackInvokedCallback="true"
-        tools:targetApi="31">
+        tools:targetApi="tiramisu">
         <activity android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -30,7 +30,8 @@
 
     </application>
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"
+        tools:ignore="ManifestOrder" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
