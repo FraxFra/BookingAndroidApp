@@ -1,23 +1,31 @@
 package com.example.bookingandroidapp.data;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingandroidapp.R;
+import com.example.bookingandroidapp.activities.HomeActivity;
 
 import java.util.List;
 
 public class AvailablePrenotationsAdapter extends RecyclerView.Adapter<AvailablePrenotationsAdapter.PrenotazioneViewHolder> {
 
     private final List<Slot> mPrenotazioni;
+    private final Context mContext;
 
-    public AvailablePrenotationsAdapter(List<Slot> prenotazioni) {
+    public AvailablePrenotationsAdapter(List<Slot> prenotazioni, Context context) {
         mPrenotazioni = prenotazioni;
+        mContext = context;
     }
 
     @NonNull
@@ -27,14 +35,25 @@ public class AvailablePrenotationsAdapter extends RecyclerView.Adapter<Available
         return new PrenotazioneViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull PrenotazioneViewHolder holder, int position) {
         Slot prenotazione = mPrenotazioni.get(position);
-        holder.mTeacherTextView.setText(String.valueOf(prenotazione.TeacherId));
+        holder.mTeacherTextView.setText("Prof. " + prenotazione.TeacherName);
         holder.mSubjectTextView.setText(String.valueOf(prenotazione.SubjectName));
         holder.mDataTextView.setText(String.valueOf(prenotazione.WeekDate));
         holder.mSTimeTextView.setText(String.valueOf(prenotazione.StartTime));
         holder.mETimeTextView.setText(String.valueOf(prenotazione.EndTime));
+        holder.prenotatiButton.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("Conferma prenotazione");
+            builder.setMessage("Vuoi davvero prenotarti per questa ripetizione?");
+            builder.setPositiveButton("Sì", (dialog, which) -> {
+                // TODO: Effettuare la prenotazione nel database
+            });
+            builder.setNegativeButton("No", null);
+            builder.show();
+        });
     }
 
     @Override
@@ -49,6 +68,7 @@ public class AvailablePrenotationsAdapter extends RecyclerView.Adapter<Available
         private final TextView mDataTextView;
         private final TextView mSTimeTextView;
         private final TextView mETimeTextView;
+        public Button prenotatiButton;
 
         public PrenotazioneViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +78,7 @@ public class AvailablePrenotationsAdapter extends RecyclerView.Adapter<Available
             mDataTextView = itemView.findViewById(R.id.data_text_view);
             mSTimeTextView = itemView.findViewById(R.id.stime_text_view);
             mETimeTextView = itemView.findViewById(R.id.etime_text_view);
+            prenotatiButton = itemView.findViewById(R.id.prenotati_button);
         }
     }
 }

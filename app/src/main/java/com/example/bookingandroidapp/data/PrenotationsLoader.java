@@ -23,6 +23,8 @@ import java.util.List;
 
 public class PrenotationsLoader extends  AsyncTask<Void, Void, List<Slot>>{
     @SuppressLint("StaticFieldLeak")
+    private final Context context;
+    @SuppressLint("StaticFieldLeak")
     private final RecyclerView recyclerView;
     @SuppressLint("StaticFieldLeak")
     private final ProgressBar progressBar;
@@ -31,10 +33,12 @@ public class PrenotationsLoader extends  AsyncTask<Void, Void, List<Slot>>{
     private static final String LOGIN_URL = "http://192.168.1.5:8080/BookingWebApp_war_exploded/SlotServlet?";
 
 
+    @SuppressWarnings("deprecation")
     public PrenotationsLoader(Context context, RecyclerView recyclerView, ProgressBar progressBar, TextView emptyView) {
         this.recyclerView = recyclerView;
         this.progressBar = progressBar;
         this.emptyView = emptyView;
+        this.context = context;
     }
 
     @Override
@@ -48,7 +52,7 @@ public class PrenotationsLoader extends  AsyncTask<Void, Void, List<Slot>>{
     @Override
     protected List<Slot> doInBackground(Void... voids) {
         // Recupera la lista di prenotazioni dal database
-        String result = null;
+        String result;
 
         try {
             Uri.Builder builder = new Uri.Builder();
@@ -99,7 +103,7 @@ public class PrenotationsLoader extends  AsyncTask<Void, Void, List<Slot>>{
             emptyView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
 
-            AvailablePrenotationsAdapter adapter = new AvailablePrenotationsAdapter(prenotazioni);
+            AvailablePrenotationsAdapter adapter = new AvailablePrenotationsAdapter(prenotazioni, context);
             recyclerView.setAdapter(adapter);
             Log.i("DSDSDDEDE", prenotazioni.toString());
         }

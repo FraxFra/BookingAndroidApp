@@ -24,4 +24,6 @@
     <string name="benvenuto">Benvenuto</string>
     <string name="ripetizione">Non c\'è nessuna ripetizione diponibile</string>
     <string name="aa">aa</string>
+    <string name="prenotati">prenotati</string>
+    <string name="immagine_di_profilo">immagine di profilo</string>
 </resources>

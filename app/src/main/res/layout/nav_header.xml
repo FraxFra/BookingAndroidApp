@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:background="@color/primaryLight"
+    android:background="@color/primaryDark"
     android:padding="16dp">
 
     <ImageView
@@ -10,7 +10,8 @@
         android:layout_height="72dp"
         android:src="@drawable/profile_image"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/immagine_di_profilo" />
 
     <TextView
         android:id="@+id/user_name"
