@@ -1,4 +1,4 @@
-package com.example.bookingandroidapp.data;
+package com.example.bookingandroidapp.Connections;
 
 import com.google.gson.reflect.TypeToken;
 

@@ -30,11 +30,8 @@ public class CustomAccountManager {
                 sharedPreferences.getString("password",null)
         );
     }
-    public String getToken() {
-        return sharedPreferences.getString("token", null);
-    }
 
-    public void deleteSavedCredentials(){
+    public static void deleteSavedCredentials(){
         SharedPreferences.Editor e =  sharedPreferences.edit();
         e.remove("username");
         e.remove("password");

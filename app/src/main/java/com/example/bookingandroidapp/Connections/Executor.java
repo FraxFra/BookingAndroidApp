@@ -1,11 +1,11 @@
-package com.example.bookingandroidapp.data;
+package com.example.bookingandroidapp.Connections;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class Executor<T> {
 
-    private TypeToken<Result<T>> responseType;
+    private final TypeToken<Result<T>> responseType;
     private Result<T> response;
 
     public Executor(TypeToken<Result<T>> responseType) {

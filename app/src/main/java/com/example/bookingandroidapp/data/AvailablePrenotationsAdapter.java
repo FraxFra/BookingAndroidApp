@@ -2,7 +2,6 @@ package com.example.bookingandroidapp.data;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookingandroidapp.Connections.PrenotationBookerTask;
 import com.example.bookingandroidapp.R;
-import com.example.bookingandroidapp.activities.HomeActivity;
 
 import java.util.List;
 
@@ -49,7 +48,8 @@ public class AvailablePrenotationsAdapter extends RecyclerView.Adapter<Available
             builder.setTitle("Conferma prenotazione");
             builder.setMessage("Vuoi davvero prenotarti per questa ripetizione?");
             builder.setPositiveButton("Sì", (dialog, which) -> {
-                // TODO: Effettuare la prenotazione nel database
+                PrenotationBookerTask p = new PrenotationBookerTask(prenotazione.SlotId, prenotazione.SubjectName, prenotazione.TeacherId, mContext);
+                p.execute();
             });
             builder.setNegativeButton("No", null);
             builder.show();

@@ -15,9 +15,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookingandroidapp.Connections.LogoutTask;
 import com.example.bookingandroidapp.R;
 import com.example.bookingandroidapp.account.CustomAccountManager;
-import com.example.bookingandroidapp.data.PrenotationsLoader;
+import com.example.bookingandroidapp.Connections.PrenotationsLoaderTask;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -53,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.action_available_reservations:
                     // Gestione del click sul menu "Home"
-                    PrenotationsLoader p = new PrenotationsLoader(HomeActivity.this, recyclerView, progressBar, titoloTextView);
+                    PrenotationsLoaderTask p = new PrenotationsLoaderTask(HomeActivity.this, recyclerView, progressBar, titoloTextView);
                     p.execute();
                     break;
                 case R.id.action_logout:
@@ -70,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         titoloTextView = findViewById(R.id.titolo_text_view);
 
-        PrenotationsLoader p = new PrenotationsLoader(this, recyclerView, progressBar, titoloTextView);
+        PrenotationsLoaderTask p = new PrenotationsLoaderTask(this, recyclerView, progressBar, titoloTextView);
         p.execute();
     }
 
@@ -79,11 +80,9 @@ public class HomeActivity extends AppCompatActivity {
         builder.setTitle("Logout");
         builder.setMessage("Sei sicuro di voler effettuare il logout?");
         builder.setPositiveButton("Sì", (dialog, which) -> {
-            // Rimuovo le credenziali salvate e riavvio l'app
-            account.deleteSavedCredentials();
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            //eseguo il logout
+            LogoutTask l = new LogoutTask(HomeActivity.this);
+            l.execute();
         });
         builder.setNegativeButton("No", null);
         builder.show();

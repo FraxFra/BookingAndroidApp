@@ -1,17 +1,16 @@
-package com.example.bookingandroidapp.data;
+package com.example.bookingandroidapp.Connections;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bookingandroidapp.R;
+import com.example.bookingandroidapp.data.AvailablePrenotationsAdapter;
+import com.example.bookingandroidapp.data.Slot;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
@@ -21,7 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class PrenotationsLoader extends  AsyncTask<Void, Void, List<Slot>>{
+public class PrenotationsLoaderTask extends  AsyncTask<Void, Void, List<Slot>>{
     @SuppressLint("StaticFieldLeak")
     private final Context context;
     @SuppressLint("StaticFieldLeak")
@@ -34,7 +33,7 @@ public class PrenotationsLoader extends  AsyncTask<Void, Void, List<Slot>>{
 
 
     @SuppressWarnings("deprecation")
-    public PrenotationsLoader(Context context, RecyclerView recyclerView, ProgressBar progressBar, TextView emptyView) {
+    public PrenotationsLoaderTask(Context context, RecyclerView recyclerView, ProgressBar progressBar, TextView emptyView) {
         this.recyclerView = recyclerView;
         this.progressBar = progressBar;
         this.emptyView = emptyView;
@@ -55,7 +54,6 @@ public class PrenotationsLoader extends  AsyncTask<Void, Void, List<Slot>>{
         String result;
 
         try {
-            Uri.Builder builder = new Uri.Builder();
 
             URL url = new URL(LOGIN_URL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -105,7 +103,6 @@ public class PrenotationsLoader extends  AsyncTask<Void, Void, List<Slot>>{
 
             AvailablePrenotationsAdapter adapter = new AvailablePrenotationsAdapter(prenotazioni, context);
             recyclerView.setAdapter(adapter);
-            Log.i("DSDSDDEDE", prenotazioni.toString());
         }
     }
 }

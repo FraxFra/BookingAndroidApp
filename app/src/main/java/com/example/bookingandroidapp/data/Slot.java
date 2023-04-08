@@ -1,9 +1,9 @@
 package com.example.bookingandroidapp.data;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Slot implements Serializable {
     public String TeacherName;
@@ -30,6 +30,7 @@ public class Slot implements Serializable {
         UserId = userId;
     }
 
+    @NonNull
     public String toString(){
         return "Prof = " + TeacherName + " " + TeacherSurname + ", Materia = " + SubjectName;
     }
