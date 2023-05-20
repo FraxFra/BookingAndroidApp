@@ -19,20 +19,17 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 public class LoginTask extends AsyncTask<Void, Void, String> {
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
     @SuppressLint("StaticFieldLeak")
     private final Activity activity;
     private final String username;
     private final String password;
     private ProgressDialog progressDialog;
-    private static ScheduledExecutorService scheduledExecutorService;
-    private static ScheduledFuture<?> scheduledMantainLogin;
 
     private static final String LOGIN_URL = "http://192.168.1.3:8080/BookingWebApp_war_exploded/PageServlet?";
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingandroidapp.Connections.PrenotationBookerTask;
+import com.example.bookingandroidapp.Connections.PrenotationsLoaderTask;
 import com.example.bookingandroidapp.R;
+import com.example.bookingandroidapp.activities.HomeActivity;
 
 import java.util.List;
 
@@ -21,10 +24,16 @@ public class AvailablePrenotationsAdapter extends RecyclerView.Adapter<Available
 
     private final List<Slot> mPrenotazioni;
     private final Context mContext;
+    private final RecyclerView mrecyclerView;
+    private final ProgressBar mprogressBar;
+    private final TextView memptyView;
 
-    public AvailablePrenotationsAdapter(List<Slot> prenotazioni, Context context) {
+    public AvailablePrenotationsAdapter(List<Slot> prenotazioni, Context context, RecyclerView recyclerView, ProgressBar progressBar, TextView emptyView) {
         mPrenotazioni = prenotazioni;
         mContext = context;
+        mrecyclerView = recyclerView;
+        mprogressBar = progressBar;
+        memptyView = emptyView;
     }
 
     @NonNull
@@ -50,6 +59,8 @@ public class AvailablePrenotationsAdapter extends RecyclerView.Adapter<Available
             builder.setPositiveButton("Sì", (dialog, which) -> {
                 PrenotationBookerTask p = new PrenotationBookerTask(prenotazione.SlotId, prenotazione.SubjectName, prenotazione.TeacherId, mContext);
                 p.execute();
+                PrenotationsLoaderTask pr = new PrenotationsLoaderTask(mContext, mrecyclerView, mprogressBar, memptyView);
+                pr.execute();
             });
             builder.setNegativeButton("No", null);
             builder.show();

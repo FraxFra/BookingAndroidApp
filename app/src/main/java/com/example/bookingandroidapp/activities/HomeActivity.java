@@ -1,7 +1,6 @@
 package com.example.bookingandroidapp.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -14,12 +13,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.bookingandroidapp.Connections.LogoutTask;
+import com.example.bookingandroidapp.Connections.PrenotationsLoaderTask;
 import com.example.bookingandroidapp.R;
 import com.example.bookingandroidapp.account.CustomAccountManager;
-import com.example.bookingandroidapp.Connections.PrenotationsLoaderTask;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -40,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.navigation_view);
         View headerView = navigationView.getHeaderView(0);
         TextView usernameTextView = headerView.findViewById(R.id.user_name);
-        usernameTextView.setText(account.getLoginCredentials().username);
+        usernameTextView.setText(CustomAccountManager.getLoginCredentials().username);
 
         // Configurazione Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);

@@ -101,7 +101,7 @@ public class PrenotationsLoaderTask extends  AsyncTask<Void, Void, List<Slot>>{
             emptyView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
 
-            AvailablePrenotationsAdapter adapter = new AvailablePrenotationsAdapter(prenotazioni, context);
+            AvailablePrenotationsAdapter adapter = new AvailablePrenotationsAdapter(prenotazioni, context, recyclerView, progressBar, emptyView);
             recyclerView.setAdapter(adapter);
         }
     }
