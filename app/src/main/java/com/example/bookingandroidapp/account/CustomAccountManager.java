@@ -23,7 +23,7 @@ public class CustomAccountManager {
         return sharedPreferences.contains("username") && sharedPreferences.contains("password");
     }
 
-    public Credential getLoginCredentials(){
+    public static Credential getLoginCredentials(){
 
         return new Credential(
                 sharedPreferences.getString("username",null),

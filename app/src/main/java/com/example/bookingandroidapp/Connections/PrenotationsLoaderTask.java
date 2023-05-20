@@ -29,7 +29,7 @@ public class PrenotationsLoaderTask extends  AsyncTask<Void, Void, List<Slot>>{
     private final ProgressBar progressBar;
     @SuppressLint("StaticFieldLeak")
     private final TextView emptyView;
-    private static final String LOGIN_URL = "http://192.168.1.5:8080/BookingWebApp_war_exploded/SlotServlet?";
+    private static final String LOGIN_URL = "http://192.168.1.3:8080/BookingWebApp_war_exploded/SlotServlet?";
 
 
     @SuppressWarnings("deprecation")

@@ -19,7 +19,7 @@ public class LogoutTask extends AsyncTask<Void, Void, String> {
 
     @SuppressLint("StaticFieldLeak")
     private final Activity activity;
-    private static final String LOGIN_URL = "http://192.168.1.5:8080/BookingWebApp_war_exploded/PageServlet?";
+    private static final String LOGIN_URL = "http://192.168.1.3:8080/BookingWebApp_war_exploded/PageServlet?";
 
     public LogoutTask(Activity activity) {
         this.activity = activity;
@@ -32,7 +32,6 @@ public class LogoutTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... voids) {
-        // invalidazione della sessione
         String result;
 
         try {
@@ -76,9 +75,6 @@ public class LogoutTask extends AsyncTask<Void, Void, String> {
 
         //rimuovo le credenziali salvate
         CustomAccountManager.deleteSavedCredentials();
-
-        //invalido la sessione
-        LoginTask.stopMantainLogin();
 
         //torno al login
         Intent intent = new Intent(activity, LoginActivity.class);

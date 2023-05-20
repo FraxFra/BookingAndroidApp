@@ -34,7 +34,7 @@ public class LoginTask extends AsyncTask<Void, Void, String> {
     private static ScheduledExecutorService scheduledExecutorService;
     private static ScheduledFuture<?> scheduledMantainLogin;
 
-    private static final String LOGIN_URL = "http://192.168.1.5:8080/BookingWebApp_war_exploded/PageServlet?";
+    private static final String LOGIN_URL = "http://192.168.1.3:8080/BookingWebApp_war_exploded/PageServlet?";
 
     public LoginTask(Context context, Activity activity, String username, String password) {
         this.context = context;
@@ -101,27 +101,10 @@ public class LoginTask extends AsyncTask<Void, Void, String> {
             //salvo le credenziali
             CustomAccountManager.saveLoginCredentials(username, password);
 
-            //valido la sessione
-            scheduleMantainLogin();
-
             //vado alla Home
             Intent intent = new Intent(activity, HomeActivity.class);
             activity.startActivity(intent);
             activity.finish();
-        }
-    }
-
-    public static void scheduleMantainLogin(){
-        scheduledExecutorService = Executors.newScheduledThreadPool(5);
-        scheduledMantainLogin = scheduledExecutorService.scheduleAtFixedRate(()->{
-            TestSessionTask t = new TestSessionTask(context);
-        },5,5, TimeUnit.MINUTES);
-    }
-
-    public static void stopMantainLogin(){
-        if (scheduledMantainLogin != null) {
-            scheduledMantainLogin.cancel(false);
-            scheduledMantainLogin = null;
         }
     }
 }

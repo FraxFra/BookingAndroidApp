@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.bookingandroidapp.Connections.LogoutTask;
 import com.example.bookingandroidapp.R;
@@ -73,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
 
         PrenotationsLoaderTask p = new PrenotationsLoaderTask(this, recyclerView, progressBar, titoloTextView);
         p.execute();
+
     }
 
     private void showLogoutDialog() {

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.bookingandroidapp.account.CustomAccountManager;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
@@ -24,7 +25,7 @@ public class PrenotationBookerTask extends  AsyncTask<Void, Void, String>{
     private final int teacherId;
     @SuppressLint("StaticFieldLeak")
     private final Context context;
-    private static final String LOGIN_URL = "http://192.168.1.5:8080/BookingWebApp_war_exploded/SlotServlet?";
+    private static final String LOGIN_URL = "http://192.168.1.3:8080/BookingWebApp_war_exploded/SlotServlet?";
 
     @SuppressWarnings("deprecation")
     public PrenotationBookerTask(int slotId, String subjectName, int teacherId, Context context) {
@@ -52,7 +53,7 @@ public class PrenotationBookerTask extends  AsyncTask<Void, Void, String>{
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            String postData = "operation=newBooking&SlotId=" + slotId + "&SubjectName=" + subjectName + "&TeacherId=" + teacherId;
+            String postData = "operation=newBooking&SlotId=" + slotId + "&SubjectName=" + subjectName + "&TeacherId=" + teacherId + "&Username=" + CustomAccountManager.getLoginCredentials().username;
 
             conn.setDoOutput(true);
             OutputStream os = conn.getOutputStream();
@@ -95,6 +96,8 @@ public class PrenotationBookerTask extends  AsyncTask<Void, Void, String>{
                 builder.setMessage("la prenotazione effettuata con successo!");
             }
         }
+
+
         builder.show();
     }
 }
