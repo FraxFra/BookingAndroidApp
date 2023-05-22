@@ -19,7 +19,7 @@ public class TestSessionTask extends AsyncTask<Void, Void, String> {
 
     @SuppressLint("StaticFieldLeak")
     private final Context context;
-    private static final String LOGIN_URL = "http://192.168.1.5:8080/BookingWebApp_war_exploded/PageServlet?";
+    private static final String LOGIN_URL = "http://192.168.174.114:8080/BookingWebApp_war_exploded/PageServlet?";
 
     public TestSessionTask(Context context) {
         this.context = context;

@@ -73,14 +73,27 @@ android:background="@drawable/rectangular_shape"
         android:layout_margin="2dp"
         android:layout_marginTop="16dp">
 
-        <Button
-            android:id="@+id/prenotati_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/prenotati"
+        <ImageButton
+            android:id="@+id/conferma_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/rounded_buttons"
-            android:textSize="10sp"
-            tools:ignore="SmallSp" />
+            android:src="@drawable/baseline_remove_circle_outline_24"
+            android:padding="8dp"
+            android:contentDescription="@string/confermation_description"/>
+
+        <Space
+            android:layout_width="4dp"
+            android:layout_height="match_parent" />
+
+        <ImageButton
+            android:id="@+id/rimuovi_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded_buttons"
+            android:src="@drawable/baseline_check_circle_outline_24"
+            android:padding="8dp"
+            android:contentDescription="@string/remove_description"/>
 
     </LinearLayout>
 

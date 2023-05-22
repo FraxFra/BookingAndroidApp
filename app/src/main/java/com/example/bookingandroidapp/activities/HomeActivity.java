@@ -3,6 +3,8 @@ package com.example.bookingandroidapp.activities;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,7 +25,8 @@ import com.google.android.material.navigation.NavigationView;
 public class HomeActivity extends AppCompatActivity {
 
     private CustomAccountManager account;
-    private RecyclerView recyclerView;
+    private RecyclerView availableBookingsRecyclerView;
+    private RecyclerView bookedPrenotationsRecyclerView;
     private ProgressBar progressBar;
     private TextView titoloTextView;
 
@@ -44,6 +47,9 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //gestione delle animazioni
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+
         // Configurazione DrawerLayout e NavigationView
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,25 +59,49 @@ public class HomeActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.action_available_reservations:
                     // Gestione del click sul menu "Home"
-                    PrenotationsLoaderTask p = new PrenotationsLoaderTask(HomeActivity.this, recyclerView, progressBar, titoloTextView);
+                    drawerLayout.closeDrawers();
+                    bookedPrenotationsRecyclerView.startAnimation(fadeOut);
+                    bookedPrenotationsRecyclerView.setVisibility(View.GONE);
+
+                    PrenotationsLoaderTask p = new PrenotationsLoaderTask(HomeActivity.this, availableBookingsRecyclerView, progressBar, titoloTextView);
                     p.execute();
                     break;
+
+                case R.id.action_booked_prenotations:
+                    // Gestione del click sul menu "le mie prenotazioni"
+                    drawerLayout.closeDrawers();
+                    availableBookingsRecyclerView.startAnimation(fadeOut);
+                    availableBookingsRecyclerView.setVisibility(View.GONE);
+
+
+                    break;
+
                 case R.id.action_logout:
                     // Gestione del click sul menu "Logout"
                     showLogoutDialog();
                     break;
+
             }
             return true;
         });
 
         //lista delle prenotazioni dispononibili
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        availableBookingsRecyclerView = findViewById(R.id.available_prenotations_recycler_view);
+        availableBookingsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressBar = findViewById(R.id.progress_bar);
         titoloTextView = findViewById(R.id.titolo_text_view);
+        availableBookingsRecyclerView.setVisibility(View.VISIBLE);
 
-        PrenotationsLoaderTask p = new PrenotationsLoaderTask(this, recyclerView, progressBar, titoloTextView);
+        PrenotationsLoaderTask p = new PrenotationsLoaderTask(this, availableBookingsRecyclerView, progressBar, titoloTextView);
         p.execute();
+
+        //lista delle prenotazioni già prenotate
+        bookedPrenotationsRecyclerView = findViewById(R.id.booked_prenotations_recycler_view);
+        bookedPrenotationsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        bookedPrenotationsRecyclerView.setVisibility(View.GONE);
+
+        //PrenotationsLoaderTask p = new PrenotationsLoaderTask(this, availableBookingsRecyclerView, progressBar, titoloTextView);
+        //p.execute();
 
     }
 

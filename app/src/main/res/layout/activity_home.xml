@@ -22,7 +22,12 @@
 
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/available_prenotations_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/booked_prenotations_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

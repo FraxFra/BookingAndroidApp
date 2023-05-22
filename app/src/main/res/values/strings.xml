@@ -26,4 +26,7 @@
     <string name="aa">aa</string>
     <string name="prenotati">prenotati</string>
     <string name="immagine_di_profilo">immagine di profilo</string>
+    <string name="bookedPrenotations">Le mie prenotationi</string>
+    <string name="confermation_description">conferma</string>
+    <string name="remove_description">rimuovi</string>
 </resources>

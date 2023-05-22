@@ -31,7 +31,7 @@ public class LoginTask extends AsyncTask<Void, Void, String> {
     private final String password;
     private ProgressDialog progressDialog;
 
-    private static final String LOGIN_URL = "http://192.168.1.3:8080/BookingWebApp_war_exploded/PageServlet?";
+    private static final String LOGIN_URL = "http://192.168.174.114:8080/BookingWebApp_war_exploded/PageServlet?";
 
     public LoginTask(Context context, Activity activity, String username, String password) {
         this.context = context;

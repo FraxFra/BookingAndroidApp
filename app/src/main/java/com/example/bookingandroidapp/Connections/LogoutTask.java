@@ -18,7 +18,7 @@ public class LogoutTask extends AsyncTask<Void, Void, String> {
 
     @SuppressLint("StaticFieldLeak")
     private final Activity activity;
-    private static final String LOGIN_URL = "http://192.168.1.3:8080/BookingWebApp_war_exploded/PageServlet?";
+    private static final String LOGIN_URL = "http://192.168.174.114:8080/BookingWebApp_war_exploded/PageServlet?";
 
     public LogoutTask(Activity activity) {
         this.activity = activity;

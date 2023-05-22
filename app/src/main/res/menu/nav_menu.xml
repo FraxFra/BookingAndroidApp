@@ -7,6 +7,12 @@
             android:title="@string/menu_home" />
 
         <item
+            android:id="@+id/action_booked_prenotations"
+            android:icon="@drawable/ic_booked_prenotations"
+            android:title="@string/bookedPrenotations"
+            app:showAsAction="never" />
+
+        <item
             android:id="@+id/action_logout"
             android:icon="@drawable/ic_logout"
             android:title="@string/logout"

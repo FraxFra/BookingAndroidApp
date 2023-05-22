@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookingandroidapp.R;
 import com.example.bookingandroidapp.data.AvailablePrenotationsAdapter;
 import com.example.bookingandroidapp.data.Slot;
 import com.google.gson.reflect.TypeToken;
@@ -29,7 +32,7 @@ public class PrenotationsLoaderTask extends  AsyncTask<Void, Void, List<Slot>>{
     private final ProgressBar progressBar;
     @SuppressLint("StaticFieldLeak")
     private final TextView emptyView;
-    private static final String LOGIN_URL = "http://192.168.1.3:8080/BookingWebApp_war_exploded/SlotServlet?";
+    private static final String LOGIN_URL = "http://192.168.174.114:8080/BookingWebApp_war_exploded/SlotServlet?";
 
 
     @SuppressWarnings("deprecation")
@@ -92,17 +95,25 @@ public class PrenotationsLoaderTask extends  AsyncTask<Void, Void, List<Slot>>{
     @Override
     protected void onPostExecute(List<Slot> prenotazioni) {
         super.onPostExecute(prenotazioni);
+        Animation fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in);
+        Animation fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out);
         progressBar.setVisibility(View.GONE);
 
         if (prenotazioni.isEmpty()) {
-            emptyView.setVisibility(View.VISIBLE);
+            recyclerView.startAnimation(fadeOut);
             recyclerView.setVisibility(View.GONE);
+            emptyView.startAnimation(fadeIn);
+            emptyView.setVisibility(View.VISIBLE);
+
         } else {
+            emptyView.startAnimation(fadeOut);
             emptyView.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
 
             AvailablePrenotationsAdapter adapter = new AvailablePrenotationsAdapter(prenotazioni, context, recyclerView, progressBar, emptyView);
             recyclerView.setAdapter(adapter);
+
+            recyclerView.startAnimation(fadeIn);
+            recyclerView.setVisibility(View.VISIBLE);
         }
     }
 }

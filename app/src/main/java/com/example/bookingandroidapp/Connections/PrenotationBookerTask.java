@@ -25,7 +25,7 @@ public class PrenotationBookerTask extends  AsyncTask<Void, Void, String>{
     private final int teacherId;
     @SuppressLint("StaticFieldLeak")
     private final Context context;
-    private static final String LOGIN_URL = "http://192.168.1.3:8080/BookingWebApp_war_exploded/SlotServlet?";
+    private static final String LOGIN_URL = "http://192.168.174.114:8080/BookingWebApp_war_exploded/SlotServlet?";
 
     @SuppressWarnings("deprecation")
     public PrenotationBookerTask(int slotId, String subjectName, int teacherId, Context context) {
