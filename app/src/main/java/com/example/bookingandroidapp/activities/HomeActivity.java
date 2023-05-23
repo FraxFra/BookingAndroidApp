@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingandroidapp.Connections.LogoutTask;
+import com.example.bookingandroidapp.Connections.PrenotationBookingsLoaderTask;
 import com.example.bookingandroidapp.Connections.PrenotationsLoaderTask;
 import com.example.bookingandroidapp.R;
 import com.example.bookingandroidapp.account.CustomAccountManager;
@@ -53,6 +54,7 @@ public class HomeActivity extends AppCompatActivity {
         // Configurazione DrawerLayout e NavigationView
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(android.R.color.white));
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(menuItem -> {
@@ -73,7 +75,8 @@ public class HomeActivity extends AppCompatActivity {
                     availableBookingsRecyclerView.startAnimation(fadeOut);
                     availableBookingsRecyclerView.setVisibility(View.GONE);
 
-
+                    PrenotationBookingsLoaderTask pb = new PrenotationBookingsLoaderTask(this, bookedPrenotationsRecyclerView, progressBar, titoloTextView);
+                    pb.execute();
                     break;
 
                 case R.id.action_logout:
@@ -91,6 +94,7 @@ public class HomeActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         titoloTextView = findViewById(R.id.titolo_text_view);
         availableBookingsRecyclerView.setVisibility(View.VISIBLE);
+
 
         PrenotationsLoaderTask p = new PrenotationsLoaderTask(this, availableBookingsRecyclerView, progressBar, titoloTextView);
         p.execute();

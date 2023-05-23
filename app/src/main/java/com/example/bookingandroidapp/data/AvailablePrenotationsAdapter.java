@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bookingandroidapp.Connections.PrenotationBookerTask;
 import com.example.bookingandroidapp.Connections.PrenotationsLoaderTask;
 import com.example.bookingandroidapp.R;
-import com.example.bookingandroidapp.activities.HomeActivity;
 
 import java.util.List;
 

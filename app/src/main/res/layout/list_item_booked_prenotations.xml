@@ -21,7 +21,7 @@ android:background="@drawable/rectangular_shape"
     android:layout_marginTop="16dp">
 
     <TextView
-        android:id="@+id/subject_text_view"
+        android:id="@+id/subject_text_viewB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -29,7 +29,7 @@ android:background="@drawable/rectangular_shape"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/teacher_text_view"
+        android:id="@+id/teacher_text_viewB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp" />
@@ -45,20 +45,20 @@ android:background="@drawable/rectangular_shape"
         android:layout_marginTop="16dp">
 
     <TextView
-        android:id="@+id/data_text_view"
+        android:id="@+id/data_text_viewB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/stime_text_view"
+        android:id="@+id/stime_text_viewB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/etime_text_view"
+        android:id="@+id/etime_text_viewB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp" />
@@ -78,7 +78,7 @@ android:background="@drawable/rectangular_shape"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/rounded_buttons"
-            android:src="@drawable/baseline_remove_circle_outline_24"
+            android:src="@drawable/baseline_check_circle_outline_24"
             android:padding="8dp"
             android:contentDescription="@string/confermation_description"/>
 
@@ -91,9 +91,17 @@ android:background="@drawable/rectangular_shape"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/rounded_buttons"
-            android:src="@drawable/baseline_check_circle_outline_24"
+            android:src="@drawable/baseline_remove_circle_outline_24"
             android:padding="8dp"
             android:contentDescription="@string/remove_description"/>
+
+        <TextView
+            android:id="@+id/booking_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:padding="8dp" />
 
     </LinearLayout>
 
