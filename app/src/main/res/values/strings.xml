@@ -29,4 +29,5 @@
     <string name="bookedPrenotations">Le mie prenotationi</string>
     <string name="confermation_description">conferma</string>
     <string name="remove_description">rimuovi</string>
+    <string name="nessuna_prenotazione_disponibile">Nessuna prenotazione disponibile</string>
 </resources>

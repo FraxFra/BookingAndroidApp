@@ -17,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookingandroidapp.Connections.PrenotationBookingsLoaderTask;
+import com.example.bookingandroidapp.Connections.PrenotationConfermationTask;
+import com.example.bookingandroidapp.Connections.PrenotationDeleteTask;
 import com.example.bookingandroidapp.R;
 
 import java.util.List;
@@ -63,7 +66,10 @@ public class BookedPrenotationsAdapter extends RecyclerView.Adapter<BookedPrenot
                 builder.setTitle("Conferma prenotazione");
                 builder.setMessage("Vuoi davvero confermare questa ripetizione?");
                 builder.setPositiveButton("Sì", (dialog, which) -> {
-                    //TODO:conferma
+                    PrenotationConfermationTask p = new PrenotationConfermationTask(mContext, String.valueOf(prenotazione.BookingId));
+                    p.execute();
+                    PrenotationBookingsLoaderTask pb = new PrenotationBookingsLoaderTask(mContext, mrecyclerView, mprogressBar, memptyView);
+                    pb.execute();
                 });
                 builder.setNegativeButton("No", null);
                 builder.show();
@@ -71,9 +77,12 @@ public class BookedPrenotationsAdapter extends RecyclerView.Adapter<BookedPrenot
             holder.cancellaButton.setOnClickListener(v -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle("Cancella prenotazione");
-                builder.setMessage("Vuoi davvero cancellare questa ripetizione?");
+                builder.setMessage("Vuoi davvero disdire questa ripetizione?");
                 builder.setPositiveButton("Sì", (dialog, which) -> {
-                    //TODO: disdetta
+                    PrenotationDeleteTask p = new PrenotationDeleteTask(mContext, String.valueOf(prenotazione.BookingId));
+                    p.execute();
+                    PrenotationBookingsLoaderTask pb = new PrenotationBookingsLoaderTask(mContext, mrecyclerView, mprogressBar, memptyView);
+                    pb.execute();
                 });
                 builder.setNegativeButton("No", null);
                 builder.show();

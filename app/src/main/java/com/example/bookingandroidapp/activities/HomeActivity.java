@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView titoloTextView;
 
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +95,6 @@ public class HomeActivity extends AppCompatActivity {
         titoloTextView = findViewById(R.id.titolo_text_view);
         availableBookingsRecyclerView.setVisibility(View.VISIBLE);
 
-
         PrenotationsLoaderTask p = new PrenotationsLoaderTask(this, availableBookingsRecyclerView, progressBar, titoloTextView);
         p.execute();
 
@@ -104,8 +103,6 @@ public class HomeActivity extends AppCompatActivity {
         bookedPrenotationsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         bookedPrenotationsRecyclerView.setVisibility(View.GONE);
 
-        //PrenotationsLoaderTask p = new PrenotationsLoaderTask(this, availableBookingsRecyclerView, progressBar, titoloTextView);
-        //p.execute();
 
     }
 

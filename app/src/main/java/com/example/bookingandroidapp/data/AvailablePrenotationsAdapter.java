@@ -53,7 +53,7 @@ public class AvailablePrenotationsAdapter extends RecyclerView.Adapter<Available
         holder.mETimeTextView.setText(String.valueOf(prenotazione.EndTime));
         holder.prenotatiButton.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-            builder.setTitle("Conferma prenotazione");
+            builder.setTitle("Registra prenotazione");
             builder.setMessage("Vuoi davvero prenotarti per questa ripetizione?");
             builder.setPositiveButton("Sì", (dialog, which) -> {
                 PrenotationBookerTask p = new PrenotationBookerTask(prenotazione.SlotId, prenotazione.SubjectName, prenotazione.TeacherId, mContext);

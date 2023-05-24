@@ -16,23 +16,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
 
-public class PrenotationBookerTask extends  AsyncTask<Void, Void, String>{
-    @SuppressLint("StaticFieldLeak")
-    private final int slotId;
-    @SuppressLint("StaticFieldLeak")
-    private final String subjectName;
-    @SuppressLint("StaticFieldLeak")
-    private final int teacherId;
+public class PrenotationConfermationTask extends AsyncTask<Void, Void, String> {
     @SuppressLint("StaticFieldLeak")
     private final Context context;
+    private final String bookingId;
     private static final String LOGIN_URL = "http://192.168.174.114:8080/BookingWebApp_war_exploded/SlotServlet?";
 
     @SuppressWarnings("deprecation")
-    public PrenotationBookerTask(int slotId, String subjectName, int teacherId, Context context) {
-        this.slotId = slotId;
-        this.subjectName = subjectName;
-        this.teacherId = teacherId;
+    public PrenotationConfermationTask(Context context, String bookingId) {
         this.context = context;
+        this.bookingId = bookingId;
     }
 
     @Override
@@ -53,7 +46,7 @@ public class PrenotationBookerTask extends  AsyncTask<Void, Void, String>{
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            String postData = "operation=newBooking&SlotId=" + slotId + "&SubjectName=" + subjectName + "&TeacherId=" + teacherId + "&Username=" + CustomAccountManager.getLoginCredentials().username;
+            String postData = "operation=ownCompletion&BookingId=" + bookingId + "&Username=" + CustomAccountManager.getLoginCredentials().username;
 
             conn.setDoOutput(true);
             OutputStream os = conn.getOutputStream();
@@ -91,14 +84,12 @@ public class PrenotationBookerTask extends  AsyncTask<Void, Void, String>{
             builder.setMessage(decodedResult.error);
         } else {
             if(!decodedResult.ok) {
-                builder.setMessage("la prenotazione è stata precedentemente effettuata");
+                builder.setMessage("Errore: la prenotazione non esiste");
             } else {
-                builder.setMessage("la prenotazione è stata effettuata con successo, ricordati di confermare o disdire la prenotazione!");
+                builder.setMessage("la prenotazione effettuata con successo!");
             }
         }
-
 
         builder.show();
     }
 }
-
